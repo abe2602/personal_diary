@@ -1,0 +1,8 @@
+{
+  "appName" : "PersonalDiary",
+  "genericErrorMessage": "Erro genérico",
+  "tryAgainButtonLabel": "Tente Novamente",
+  "noInternetMessage" : "Parece que você está sem internet! , \n Tente conectar-se em alguma rede! ;)",
+  "emptyFieldError": "Campo Vazio",
+  "invalidFieldError": "Formato Invalido"
+}
