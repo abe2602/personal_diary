@@ -21,27 +21,33 @@ class AdaptiveScaffold extends AdaptiveStatelessWidget {
 
   @override
   Widget buildCupertinoWidget(BuildContext context) => CupertinoPageScaffold(
-        navigationBar: CupertinoNavigationBar(
-          middle: Text(
-            title,
-            maxLines: 1,
-          ),
-          trailing: action,
-        ),
+        navigationBar: title != null
+            ? CupertinoNavigationBar(
+                middle: Text(
+                  title,
+                  maxLines: 1,
+                ),
+                trailing: action,
+              )
+            : null,
         backgroundColor: backgroundColor,
+        resizeToAvoidBottomInset: false,
         child: SafeArea(child: body),
       );
 
   @override
   Widget buildMaterialWidget(BuildContext context) => Scaffold(
-        appBar: AppBar(
-          title: Text(
-            title,
-            maxLines: 1,
-          ),
-          actions: action != null ? <Widget>[action] : null,
-        ),
+        appBar: title != null
+            ? AppBar(
+                title: Text(
+                  title,
+                  maxLines: 1,
+                ),
+                actions: action != null ? <Widget>[action] : null,
+              )
+            : null,
         body: body,
+        resizeToAvoidBottomInset: false,
         backgroundColor: backgroundColor,
       );
 }

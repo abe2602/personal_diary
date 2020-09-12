@@ -1,8 +1,8 @@
 import 'package:flutter/widgets.dart';
 import 'package:personal_diary/presentation/common/subscription_utils.dart';
 
-class PizzaCounterActionListener<T> extends StatefulWidget {
-  const PizzaCounterActionListener({
+class PersonalDiaryActionListener<T> extends StatefulWidget {
+  const PersonalDiaryActionListener({
     @required this.child,
     @required this.actionStream,
     @required this.onReceived,
@@ -17,12 +17,12 @@ class PizzaCounterActionListener<T> extends StatefulWidget {
   final Function(T action) onReceived;
 
   @override
-  _PizzaCounterActionListenerState<T> createState() =>
-      _PizzaCounterActionListenerState<T>();
+  _PersonalDiaryActionListenerState<T> createState() =>
+      _PersonalDiaryActionListenerState<T>();
 }
 
-class _PizzaCounterActionListenerState<T>
-    extends State<PizzaCounterActionListener<T>> with SubscriptionBag {
+class _PersonalDiaryActionListenerState<T>
+    extends State<PersonalDiaryActionListener<T>> with SubscriptionBag {
   @override
   void initState() {
     widget.actionStream

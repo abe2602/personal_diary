@@ -1,8 +1,18 @@
 {
   "appName" : "PersonalDiary",
+  "appTitle": "Personal Diary",
+  "secondaryTitle": "your best friend",
   "genericErrorMessage": "Generic Error",
   "tryAgainButtonLabel": "Try Again",
   "noInternetMessage" : "Looks like there's no internet , \n Try to connect into internet ;)",
   "emptyFieldError": "Empty Field",
-  "invalidFieldError": "Invalid Field"
+  "invalidFieldError": "Invalid Field",
+  "signInInvalidUsernameErrorLabel": "Invalid username format",
+  "signInEmptyUsernameErrorLabel": "Empty username field",
+  "signInUsernameFieldLabel": "Username",
+  "signInInvalidPasswordErrorLabel": "Invalid password format",
+  "signInEmptyPasswordErrorLabel": "Empty password field",
+  "signInPasswordFieldLabel": "Password",
+  "signInLabel": "SIGN IN",
+  "signInFirstAccess": "FIRST ACCESS"
 }
