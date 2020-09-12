@@ -35,6 +35,8 @@ dependencies:
   pie_chart: ^3.1.1
   grafpix: ^1.2.8
   random_color: ^1.0.5
+  flutter_secure_storage: ^3.3.3
+  pin_code_fields: ^5.0.1
   domain:
     path: domain
 
@@ -65,6 +67,19 @@ flutter:
   #  - images/a_dot_burr.jpeg
   #  - images/a_dot_ham.jpeg
 
+  fonts:
+    - family: MPRounded
+      fonts:
+        - asset: fonts/MPLUSRounded1c-Regular.ttf
+        - asset: fonts/MPLUSRounded1c-Medium.ttf
+          weight: 500
+        - asset: fonts/MPLUSRounded1c-Bold.ttf
+          weight: 700
+    - family: Karla
+      fonts:
+        - asset: fonts/Karla-Regular.ttf
+        - asset: fonts/Karla-Bold.ttf
+          weight: 700
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 

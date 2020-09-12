@@ -3,6 +3,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:personal_diary/presentation/common/adaptive_app.dart';
+import 'package:personal_diary/presentation/common/personal_diary_colors.dart';
 import 'package:personal_diary/presentation/common/personal_diary_general_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -37,14 +38,15 @@ class MainWidgetState extends State<MainWidget> {
   @override
   Widget build(BuildContext context) => PizzaCounterGeneralProvider(
         child: AdaptiveApp(
-          localizationsDelegates: [
+          localizationsDelegates: const [
             S.delegate,
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
           ],
+
           supportedLocales: S.delegate.supportedLocales,
-          primaryColor: Colors.red,
+          primaryColor: PersonalDiaryColors.primaryColor,
 
           //Precisamos usar o onGenerateTitle para ter certeza que teremos um
           //context com o Locale já pronto para uso

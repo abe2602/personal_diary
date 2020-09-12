@@ -1,12 +1,18 @@
-import 'package:dio/dio.dart';
+import 'package:domain/use_case/sign_in_uc.dart';
+import 'package:domain/use_case/validate_username_format_uc.dart';
+import 'package:domain/use_case/validate_password_format_uc.dart';
+import 'package:domain/data_repository/auth_data_repository.dart';
 import 'package:fluro/fluro.dart';
-import 'package:flutter/widgets.dart' hide Router;
-import 'package:personal_diary/data/remote/personal_diary_dio.dart';
-import 'navigation_utils.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:personal_diary/data/repository/auth_repository.dart';
+import 'package:personal_diary/data/secure/auth_sds.dart';
 import 'package:personal_diary/presentation/home_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 import 'package:rxdart/rxdart.dart';
+
+import 'navigation_utils.dart';
 
 class PizzaCounterGeneralProvider extends StatelessWidget {
   const PizzaCounterGeneralProvider({
@@ -18,9 +24,12 @@ class PizzaCounterGeneralProvider extends StatelessWidget {
   @override
   Widget build(BuildContext context) => MultiProvider(
         providers: [
+          Provider<FlutterSecureStorage>(
+            create: (_) => const FlutterSecureStorage(),
+          ),
           ..._buildStreamProviders(),
           ..._buildCDSProviders(),
-          ..._buildRDSProviders(),
+          ..._buildSDSProviders(),
           ..._buildRepositoryProviders(),
           ..._buildUseCaseProviders(),
           ..._buildRouteFactory(),
@@ -30,21 +39,13 @@ class PizzaCounterGeneralProvider extends StatelessWidget {
 
   List<SingleChildWidget> _buildRouteFactory() => [
         Provider<Router>(
-          create: (context) => Router()
-            ..define(
-              '/',
-              handler: Handler(
-                handlerFunc: (context, params) => HomeScreen(),
-              ),
-            )
-//            ..define(
-//              RouteNameBuilder.pizzaCounterResource,
-//              handler: Handler(
-//                handlerFunc: (context, params) =>
-//                    PizzaCounterPage.create(context),
-//              ),
-//            )
-        ),
+            create: (context) => Router()
+              ..define(
+                '/',
+                handler: Handler(
+                  handlerFunc: (context, params) => HomeScreen(),
+                ),
+              )),
         //Com a atualização do Flutter, o método "generator" do Router ficou com
         //bugs. Para resolver isso, criei uma extension chamada
         // routeGeneratorFactory, com isso eu posso utilizar o meu generator
@@ -62,23 +63,34 @@ class PizzaCounterGeneralProvider extends StatelessWidget {
         ),
       ];
 
-  List<SingleChildWidget> _buildCDSProviders() => [
-      ];
+  List<SingleChildWidget> _buildCDSProviders() => [];
 
-  List<SingleChildWidget> _buildRDSProviders() => [
-        Provider<Dio>(
-          create: (context) {
-            final options = BaseOptions(
-              baseUrl: '',
-            );
-            return PizzaCounterDio(options);
-          },
+  List<SingleChildWidget> _buildSDSProviders() => [
+        ProxyProvider<FlutterSecureStorage, AuthSDS>(
+          update: (_, secureStorage, __) =>
+              AuthSDS(secureStorage: secureStorage),
         ),
       ];
 
   List<SingleChildWidget> _buildRepositoryProviders() => [
+        ProxyProvider<AuthSDS, AuthDataRepository>(
+          update: (_, authSDS, __) => AuthRepository(
+            authSDS: authSDS,
+          ),
+        ),
       ];
 
   List<SingleChildWidget> _buildUseCaseProviders() => [
+        Provider<ValidateUsernameFormatUC>(
+          create: (_) => ValidateUsernameFormatUC(),
+        ),
+        Provider<ValidatePasswordFormatUC>(
+          create: (_) => ValidatePasswordFormatUC(),
+        ),
+        ProxyProvider<AuthDataRepository, SignInUC>(
+          update: (_, authRepository, __) => SignInUC(
+            authRepository: authRepository,
+          ),
+        ),
       ];
 }

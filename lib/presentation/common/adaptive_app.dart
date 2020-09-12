@@ -10,8 +10,7 @@ class AdaptiveApp extends AdaptiveStatelessWidget {
     this.localizationsDelegates,
     this.supportedLocales,
     Key key,
-  })  :
-        assert(onGenerateTitle != null),
+  })  : assert(onGenerateTitle != null),
         assert(primaryColor != null),
         super(key: key);
 
@@ -24,7 +23,14 @@ class AdaptiveApp extends AdaptiveStatelessWidget {
   Widget buildCupertinoWidget(BuildContext context) => CupertinoApp(
         onGenerateTitle: onGenerateTitle,
         debugShowCheckedModeBanner: false,
-        theme: CupertinoThemeData(primaryColor: primaryColor),
+        theme: CupertinoThemeData(
+          primaryColor: primaryColor,
+          textTheme: const CupertinoTextThemeData(
+            textStyle: TextStyle(
+              fontFamily: 'MPRounded',
+            ),
+          ),
+        ),
         onGenerateRoute: Provider.of<RouteFactory>(context, listen: false),
         localizationsDelegates: localizationsDelegates,
         supportedLocales: supportedLocales,
@@ -34,7 +40,10 @@ class AdaptiveApp extends AdaptiveStatelessWidget {
   Widget buildMaterialWidget(BuildContext context) => MaterialApp(
         onGenerateTitle: onGenerateTitle,
         debugShowCheckedModeBanner: false,
-        theme: ThemeData(primarySwatch: primaryColor),
+        theme: ThemeData(
+          primarySwatch: primaryColor,
+          fontFamily: 'MPRounded',
+        ),
         onGenerateRoute: Provider.of<RouteFactory>(context, listen: false),
         localizationsDelegates: localizationsDelegates,
         supportedLocales: supportedLocales,
