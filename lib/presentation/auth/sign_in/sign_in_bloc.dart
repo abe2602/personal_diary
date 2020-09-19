@@ -3,8 +3,8 @@ import 'package:flutter/foundation.dart';
 import 'package:personal_diary/presentation/auth/sign_in/sign_in_models.dart';
 import 'package:personal_diary/presentation/common/input_status_vm.dart';
 import 'package:personal_diary/presentation/common/subscription_utils.dart';
-import 'package:domain/use_case/validate_password_format_uc.dart';
-import 'package:domain/use_case/validate_username_format_uc.dart';
+import 'package:domain/use_case/validate_password_uc.dart';
+import 'package:domain/use_case/validate_username_uc.dart';
 import 'package:domain/use_case/sign_in_uc.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:personal_diary/presentation/common/view_utils.dart';
@@ -34,7 +34,7 @@ class SignInBloc with SubscriptionBag {
         .addTo(subscriptionsBag);
   }
 
-  final ValidatePasswordFormatUC validatePasswordFormatUC;
+  final ValidatePasswordUC validatePasswordFormatUC;
   final SignInUC signInUC;
 
   // Sign in
@@ -71,7 +71,7 @@ class SignInBloc with SubscriptionBag {
   Future<void> _validatePassword(Sink<InputStatusVM> sink) =>
       validatePasswordFormatUC
           .getFuture(
-            params: ValidatePasswordFormatUCParams(password: _passwordValue),
+            params: ValidatePasswordUCParams(password: _passwordValue),
           )
           .addStatusToSink(sink);
 

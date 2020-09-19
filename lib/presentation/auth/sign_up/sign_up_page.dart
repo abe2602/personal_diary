@@ -8,9 +8,9 @@ import 'package:personal_diary/presentation/common/alert_dialog/generic_error_al
 import 'package:personal_diary/presentation/common/form_text_field.dart';
 import 'package:personal_diary/presentation/common/route_name_builder.dart';
 import 'package:provider/provider.dart';
-import 'package:domain/use_case/validate_password_format_uc.dart';
-import 'package:domain/use_case/validate_username_format_uc.dart';
-import 'package:domain/use_case/validate_confirm_password_format_uc.dart';
+import 'package:domain/use_case/validate_password_uc.dart';
+import 'package:domain/use_case/validate_username_uc.dart';
+import 'package:domain/use_case/validate_confirm_password_uc.dart';
 import 'package:domain/use_case/sign_up_uc.dart';
 import 'package:personal_diary/presentation/common/personal_diary_action_listener.dart';
 import 'package:personal_diary/presentation/common/personal_diary_colors.dart';
@@ -24,9 +24,9 @@ class SignUpPage extends StatefulWidget {
   final SignUpBloc bloc;
 
   static Widget create() => ProxyProvider4<
-          ValidatePasswordFormatUC,
+          ValidatePasswordUC,
           ValidateUsernameFormatUC,
-          ValidateConfirmPasswordFormatUC,
+          ValidateConfirmPasswordUC,
           SignUpUC,
           SignUpBloc>(
         update: (_, validatePasswordFormatUC, validateUsernameFormatUC,

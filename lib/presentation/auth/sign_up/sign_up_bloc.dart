@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
-import 'package:domain/use_case/validate_password_format_uc.dart';
-import 'package:domain/use_case/validate_username_format_uc.dart';
-import 'package:domain/use_case/validate_confirm_password_format_uc.dart';
+import 'package:domain/use_case/validate_password_uc.dart';
+import 'package:domain/use_case/validate_username_uc.dart';
+import 'package:domain/use_case/validate_confirm_password_uc.dart';
 import 'package:domain/use_case/sign_up_uc.dart';
 import 'package:personal_diary/presentation/auth/sign_up/sign_up_models.dart';
 import 'package:personal_diary/presentation/common/input_status_vm.dart';
@@ -50,9 +50,9 @@ class SignUpBloc with SubscriptionBag {
         .addTo(subscriptionsBag);
   }
 
-  final ValidatePasswordFormatUC validatePasswordFormatUC;
+  final ValidatePasswordUC validatePasswordFormatUC;
   final ValidateUsernameFormatUC validateUsernameFormatUC;
-  final ValidateConfirmPasswordFormatUC validateConfirmPasswordFormatUC;
+  final ValidateConfirmPasswordUC validateConfirmPasswordFormatUC;
   final SignUpUC signUpUC;
 
   // State
@@ -126,21 +126,21 @@ class SignUpBloc with SubscriptionBag {
   Future<void> _validatePassword(Sink<InputStatusVM> sink) =>
       validatePasswordFormatUC
           .getFuture(
-            params: ValidatePasswordFormatUCParams(password: _passwordValue),
+            params: ValidatePasswordUCParams(password: _passwordValue),
           )
           .addStatusToSink(sink);
 
   Future<void> _validateUsername(Sink<InputStatusVM> sink) =>
       validateUsernameFormatUC
           .getFuture(
-            params: ValidateUsernameFormatUCParams(username: _nameValue),
+            params: ValidateUsernameUCParams(username: _nameValue),
           )
           .addStatusToSink(sink);
 
   Future<void> _validateConfirmPassword(Sink<InputStatusVM> sink) =>
       validateConfirmPasswordFormatUC
           .getFuture(
-            params: ValidateConfirmPasswordFormatUCParams(
+            params: ValidateConfirmPasswordUCParams(
                 password: _passwordValue,
                 confirmPassword: _confirmPasswordValue),
           )

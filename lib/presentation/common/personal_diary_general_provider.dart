@@ -1,8 +1,8 @@
 import 'package:domain/use_case/sign_in_uc.dart';
 import 'package:domain/use_case/sign_up_uc.dart';
-import 'package:domain/use_case/validate_username_format_uc.dart';
-import 'package:domain/use_case/validate_password_format_uc.dart';
-import 'package:domain/use_case/validate_confirm_password_format_uc.dart';
+import 'package:domain/use_case/validate_username_uc.dart';
+import 'package:domain/use_case/validate_password_uc.dart';
+import 'package:domain/use_case/validate_confirm_password_uc.dart';
 import 'package:domain/data_repository/auth_data_repository.dart';
 import 'package:fluro/fluro.dart';
 import 'package:flutter/widgets.dart';
@@ -103,11 +103,11 @@ class PizzaCounterGeneralProvider extends StatelessWidget {
         Provider<ValidateUsernameFormatUC>(
           create: (_) => ValidateUsernameFormatUC(),
         ),
-        Provider<ValidatePasswordFormatUC>(
-          create: (_) => ValidatePasswordFormatUC(),
+        Provider<ValidatePasswordUC>(
+          create: (_) => ValidatePasswordUC(),
         ),
-        Provider<ValidateConfirmPasswordFormatUC>(
-          create: (_) => ValidateConfirmPasswordFormatUC(),
+        Provider<ValidateConfirmPasswordUC>(
+          create: (_) => ValidateConfirmPasswordUC(),
         ),
         ProxyProvider<AuthDataRepository, SignInUC>(
           update: (_, authRepository, __) => SignInUC(

@@ -1,5 +1,5 @@
 import 'package:domain/use_case/sign_in_uc.dart';
-import 'package:domain/use_case/validate_password_format_uc.dart';
+import 'package:domain/use_case/validate_password_uc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -27,7 +27,7 @@ class SignInPage extends StatefulWidget {
   final SignInBloc bloc;
 
   static Widget create() =>
-      ProxyProvider2<ValidatePasswordFormatUC, SignInUC, SignInBloc>(
+      ProxyProvider2<ValidatePasswordUC, SignInUC, SignInBloc>(
         update: (_, validatePasswordFormatUC, signInUC, bloc) =>
             bloc ??
             SignInBloc(

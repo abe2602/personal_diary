@@ -5,10 +5,10 @@ import 'package:domain/use_case/use_case.dart';
 import 'package:meta/meta.dart';
 
 class ValidateUsernameFormatUC
-    extends UseCase<ValidateUsernameFormatUCParams, void> {
+    extends UseCase<ValidateUsernameUCParams, void> {
 
   @override
-  Future<void> getRawFuture({ValidateUsernameFormatUCParams params}) {
+  Future<void> getRawFuture({ValidateUsernameUCParams params}) {
     final username = params.username ?? '';
     final completer = Completer();
 
@@ -25,8 +25,8 @@ class ValidateUsernameFormatUC
   }
 }
 
-class ValidateUsernameFormatUCParams {
-  const ValidateUsernameFormatUCParams({
+class ValidateUsernameUCParams {
+  const ValidateUsernameUCParams({
     @required this.username,
   });
 

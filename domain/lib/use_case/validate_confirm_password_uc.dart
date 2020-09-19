@@ -4,24 +4,20 @@ import 'package:domain/exceptions.dart';
 import 'package:domain/use_case/use_case.dart';
 import 'package:meta/meta.dart';
 
-class ValidatePasswordFormatUC
-    extends UseCase<ValidatePasswordFormatUCParams, void> {
+class ValidateConfirmPasswordUC
+    extends UseCase<ValidateConfirmPasswordUCParams, void> {
   @override
-  Future<void> getRawFuture({ValidatePasswordFormatUCParams params}) {
+  Future<void> getRawFuture({ValidateConfirmPasswordUCParams params}) {
     final completer = Completer();
     final password = params.password ?? '';
+    final confirmPassword = params.confirmPassword ?? '';
 
-    if (password.isEmpty) {
+    if (confirmPassword.isEmpty ) {
       completer.completeError(EmptyFormFieldException());
       return completer.future;
     }
 
-    final matches = RegExp('^[0-9]{6}\$').allMatches(password);
-
-    final isValid = matches
-        .any((match) => match.start == 0 && match.end == password.length);
-
-    if (!isValid) {
+    if (password != confirmPassword) {
       completer.completeError(InvalidFormFieldException());
     } else {
       completer.complete();
@@ -31,10 +27,12 @@ class ValidatePasswordFormatUC
   }
 }
 
-class ValidatePasswordFormatUCParams {
-  const ValidatePasswordFormatUCParams({
+class ValidateConfirmPasswordUCParams {
+  const ValidateConfirmPasswordUCParams({
     @required this.password,
+    @required this.confirmPassword,
   });
 
   final String password;
+  final String confirmPassword;
 }
