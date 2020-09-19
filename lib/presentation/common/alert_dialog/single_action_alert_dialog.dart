@@ -3,21 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:personal_diary/presentation/common/adaptive_flat_button.dart';
 import 'package:personal_diary/presentation/common/personal_diary_colors.dart';
 
-// Dialogs used in this project are different than iOS and Android natives
-// ones, so there's no need to be adaptive.
 class SingleActionAlertDialog extends StatelessWidget {
   const SingleActionAlertDialog({
-    @required this.primaryMessage,
+    @required this.title,
     @required this.buttonText,
-    this.secondaryMessage,
+    this.message,
     this.icon,
     this.onPressed,
     this.shouldDismissOnBackPress = true,
-  })  : assert(primaryMessage != null),
+  })  : assert(title != null),
         assert(shouldDismissOnBackPress != null);
 
-  final String primaryMessage;
-  final String secondaryMessage;
+  final String title;
+  final String message;
   final String buttonText;
   final IconData icon;
   final VoidCallback onPressed;
@@ -44,7 +42,7 @@ class SingleActionAlertDialog extends StatelessWidget {
                   height: 24,
                 ),
                 Text(
-                  primaryMessage,
+                  title,
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                     fontSize: 14,
@@ -56,7 +54,7 @@ class SingleActionAlertDialog extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    secondaryMessage ?? '',
+                    message ?? '',
                     textAlign: TextAlign.center,
                     style: const TextStyle(
                       fontSize: 14,

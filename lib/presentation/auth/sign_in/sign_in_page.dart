@@ -191,8 +191,8 @@ class SignInPageState extends State<SignInPage> {
 class _InvalidCredentialsAlertDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) => SingleActionAlertDialog(
-    primaryMessage: S.of(context).signInPageInvalidCredentialsError,
-    secondaryMessage: S.of(context).signInPageTryAgainText,
+    title: S.of(context).signInPageInvalidCredentialsError,
+    message: S.of(context).signInPageTryAgainText,
       buttonText: 'Okay',
   );
 
@@ -200,8 +200,8 @@ class _InvalidCredentialsAlertDialog extends StatelessWidget {
 class _NoUserCreatedAlertDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) => SingleActionAlertDialog(
-    primaryMessage: S.of(context).signInPageNoUserCreatedError,
-    secondaryMessage: S.of(context).signInPageNoUserCreatedErrorTryAgainText,
+    title: S.of(context).signInPageNoUserCreatedError,
+    message: S.of(context).signInPageNoUserCreatedErrorTryAgainText,
     buttonText: 'Okay',
   );
 }

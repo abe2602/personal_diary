@@ -7,8 +7,8 @@ import 'single_action_alert_dialog.dart';
 class GenericErrorAlertDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) => SingleActionAlertDialog(
-        primaryMessage: S.of(context).genericErrorPrimaryText,
-        secondaryMessage: S.of(context).genericErrorSecondaryText,
+        title: S.of(context).genericErrorPrimaryText,
+        message: S.of(context).genericErrorSecondaryText,
         buttonText: S.of(context).tryAgainButtonLabel,
       );
 }
