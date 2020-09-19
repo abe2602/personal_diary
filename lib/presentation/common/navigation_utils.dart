@@ -7,3 +7,4 @@ extension RouteFactoryGenerator on Router {
       matchRoute(context, routeSettings.name, routeSettings: routeSettings)
           .route;
 }
+ 
