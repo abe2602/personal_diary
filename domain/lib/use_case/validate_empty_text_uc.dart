@@ -20,7 +20,9 @@ class ValidateEmptyTextUC extends UseCase<ValidateEmptyTextUCParams, void> {
 }
 
 class ValidateEmptyTextUCParams {
-  const ValidateEmptyTextUCParams(this.text);
+  const ValidateEmptyTextUCParams(
+    this.text,
+  );
 
   final String text;
 }

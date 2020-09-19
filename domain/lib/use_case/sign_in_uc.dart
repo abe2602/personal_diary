@@ -11,16 +11,13 @@ class SignInUC extends UseCase<SignInUCParams, void> {
 
   @override
   Future<void> getRawFuture({SignInUCParams params}) =>
-      authRepository.signIn(params.username, params.password);
+      authRepository.signIn(params.password);
 }
 
 class SignInUCParams {
   const SignInUCParams({
-    @required this.username,
     @required this.password,
-  })  : assert(username != null),
-        assert(password != null);
+  })  :assert(password != null);
 
-  final String username;
   final String password;
 }

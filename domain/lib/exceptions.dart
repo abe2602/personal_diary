@@ -8,6 +8,8 @@ class UnexpectedException implements PersonalDiaryException {}
 
 class InvalidCredentialsException implements PersonalDiaryException {}
 
+class NoUserCreatedException implements PersonalDiaryException {}
+
 abstract class FormFieldException implements PersonalDiaryException {}
 
 class EmptyFormFieldException implements FormFieldException {}

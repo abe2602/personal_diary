@@ -5,17 +5,17 @@ import 'package:domain/use_case/use_case.dart';
 import 'package:meta/meta.dart';
 
 class ValidateUsernameFormatUC
-    extends UseCase<ValidateUsernameFormatUCParams, void> {
+    extends UseCase<ValidateUsernameUCParams, void> {
 
   @override
-  Future<void> getRawFuture({ValidateUsernameFormatUCParams params}) {
+  Future<void> getRawFuture({ValidateUsernameUCParams params}) {
     final username = params.username ?? '';
     final completer = Completer();
 
     if (username.isEmpty) {
       completer.completeError(EmptyFormFieldException());
       return completer.future;
-    } else if(username.contains(' ') || username.length > 12) {
+    } else if(username.length > 101) {
       completer.completeError(InvalidFormFieldException());
     } else {
       completer.complete();
@@ -25,9 +25,9 @@ class ValidateUsernameFormatUC
   }
 }
 
-class ValidateUsernameFormatUCParams {
-  const ValidateUsernameFormatUCParams({
-    @required this.username,
+class ValidateUsernameUCParams {
+  const ValidateUsernameUCParams({
+    this.username,
   });
 
   final String username;

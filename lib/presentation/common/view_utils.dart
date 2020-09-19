@@ -1,7 +1,9 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:domain/exceptions.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:personal_diary/generated/l10n.dart';
@@ -96,7 +98,7 @@ class GenericErrorEmptyState extends StatelessWidget {
   Widget build(BuildContext context) => Center(
         child: Column(
           children: <Widget>[
-            Text(S.of(context).genericErrorMessage),
+            Text(S.of(context).genericErrorPrimaryText),
             FlatButton(
               onPressed: () => action,
               child: Text(S.of(context).tryAgainButtonLabel),
@@ -141,5 +143,17 @@ extension FocusNodeViewUtils on FocusNode {
 extension ObservableViewUtils<T> on Stream<T> {
   Stream<T> addToSink(Sink<T> sink) => doOnData(
         (data) => sink.add(data),
+      );
+}
+
+extension DialogUtils on Widget {
+  Future<T> showAsDialog<T>(BuildContext context,
+      {bool isMaterialDismissible = true}) async =>
+      Platform.isIOS
+          ? showCupertinoDialog(context: context, builder: (context) => this)
+          : showDialog(
+        context: context,
+        builder: (context) => this,
+        barrierDismissible: isMaterialDismissible,
       );
 }
