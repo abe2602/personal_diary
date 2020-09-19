@@ -33,7 +33,7 @@ class ValidatePasswordUC
 
 class ValidatePasswordUCParams {
   const ValidatePasswordUCParams({
-    @required this.password,
+    this.password,
   });
 
   final String password;

@@ -29,8 +29,8 @@ class ValidateConfirmPasswordUC
 
 class ValidateConfirmPasswordUCParams {
   const ValidateConfirmPasswordUCParams({
-    @required this.password,
-    @required this.confirmPassword,
+    this.password,
+    this.confirmPassword,
   });
 
   final String password;

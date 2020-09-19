@@ -27,7 +27,7 @@ class ValidateUsernameFormatUC
 
 class ValidateUsernameUCParams {
   const ValidateUsernameUCParams({
-    @required this.username,
+    this.username,
   });
 
   final String username;
