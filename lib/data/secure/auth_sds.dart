@@ -10,8 +10,6 @@ class AuthSDS {
 
   final FlutterSecureStorage secureStorage;
 
-  static const _userKey = 'userKey';
-
   Future<void> upsertPassword(String username, String password) =>
       secureStorage.write(
         key: username,
@@ -28,22 +26,5 @@ class AuthSDS {
 
   Future<void> deletePassword(String username) => secureStorage.delete(
         key: username,
-      );
-
-  Future<Box> _openUserBox() => Hive.openBox(_userKey);
-
-  Future<String> getUserName() => _openUserBox().then(
-        (box) {
-          final userName = box.get(_userKey);
-
-          if (userName == null) {
-            throw NoUserCreatedException();
-          }
-          return userName;
-        },
-      );
-
-  Future<void> upsertUserName(String name) => _openUserBox().then(
-        (box) => box.put(_userKey, name),
       );
 }

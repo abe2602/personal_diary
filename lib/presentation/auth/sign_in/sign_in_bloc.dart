@@ -4,7 +4,7 @@ import 'package:personal_diary/presentation/auth/sign_in/sign_in_models.dart';
 import 'package:personal_diary/presentation/common/input_status_vm.dart';
 import 'package:personal_diary/presentation/common/subscription_utils.dart';
 import 'package:domain/use_case/validate_password_uc.dart';
-import 'package:domain/use_case/validate_username_uc.dart';
+import 'package:domain/use_case/get_user_name_uc.dart';
 import 'package:domain/use_case/sign_in_uc.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:personal_diary/presentation/common/view_utils.dart';
@@ -13,8 +13,10 @@ class SignInBloc with SubscriptionBag {
   SignInBloc({
     @required this.validatePasswordFormatUC,
     @required this.signInUC,
+    @required this.getUserNameUC,
   })  : assert(validatePasswordFormatUC != null),
-        assert(signInUC != null) {
+        assert(signInUC != null),
+        assert(getUserNameUC != null) {
     _onPasswordFocusLostSubject
         .listen(
           (_) => _validatePassword(_passwordInputStatusSubject),
@@ -32,10 +34,13 @@ class SignInBloc with SubscriptionBag {
         )
         .listen(_onNewStateSubject.add)
         .addTo(subscriptionsBag);
+
+    _checkSignInFlow().listen(_onNewStateSubject.add).addTo(subscriptionsBag);
   }
 
   final ValidatePasswordUC validatePasswordFormatUC;
   final SignInUC signInUC;
+  final GetUserNameUC getUserNameUC;
 
   // Sign in
   final _onSignInSubject = PublishSubject<void>();
@@ -43,7 +48,7 @@ class SignInBloc with SubscriptionBag {
   Sink<void> get onSignInSink => _onSignInSubject.sink;
 
   // State
-  final _onNewStateSubject = BehaviorSubject<SignInState>.seeded(Idle());
+  final _onNewStateSubject = BehaviorSubject<SignInState>();
 
   Stream<SignInState> get onNewState => _onNewStateSubject.stream;
 
@@ -68,12 +73,31 @@ class SignInBloc with SubscriptionBag {
 
   Sink<void> get onPasswordFocusLostSink => _onPasswordFocusLostSubject.sink;
 
+   // Values
+  String _userName;
+
+  // Functions
   Future<void> _validatePassword(Sink<InputStatusVM> sink) =>
       validatePasswordFormatUC
           .getFuture(
             params: ValidatePasswordUCParams(password: _passwordValue),
           )
           .addStatusToSink(sink);
+
+  Stream<SignInState> _checkSignInFlow() async* {
+    try {
+      _userName = await getUserNameUC.getFuture();
+      _onNewStateSubject.add(
+        SignInFlow(
+          userName: _userName,
+        ),
+      );
+    } catch (error) {
+      _onNewStateSubject.add(
+        SignInFlow(),
+      );
+    }
+  }
 
   Stream<SignInState> _signIn() async* {
     yield Loading();
@@ -87,7 +111,10 @@ class SignInBloc with SubscriptionBag {
 
       _onNewActionSubject.add(ShowMainContent());
     } catch (error) {
-      yield Idle();
+      yield SignInFlow(
+        userName: _userName,
+      );
+
       SignInActionError signInActionError;
 
       // Senha está errada

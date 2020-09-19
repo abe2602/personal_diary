@@ -12,6 +12,13 @@ class ShowGenericError implements SignInActionError {}
 
 abstract class SignInState {}
 
-class Idle extends SignInState {}
+//todo: This name is horrible, need to think in something better
+class SignInFlow extends SignInState {
+  SignInFlow({
+    this.userName,
+  });
+
+  final String userName;
+}
 
 class Loading extends SignInState {}
