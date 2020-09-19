@@ -18,6 +18,7 @@
   "signInPageNoUserCreatedError": "Não há nenhum usuário criado.",
   "signInPageNoUserCreatedErrorTryAgainText": "Por favor, cadastre-se antes de tentar usar!",
   "signInPageWelcomeMessage": "Bem-vindo(a) de volta, {name}!",
+  "signInPageOkLabel": "OK!",
   "signUpUsernameFieldLabel": "Usuário",
   "signUpInvalidUsernameErrorLabel": "Formato do usuário inválido",
   "signUpEmptyUsernameErrorLabel": "Campo de usuário vazio",

@@ -236,7 +236,7 @@ class _InvalidCredentialsAlertDialog extends StatelessWidget {
   Widget build(BuildContext context) => SingleActionAlertDialog(
         title: S.of(context).signInPageInvalidCredentialsError,
         message: S.of(context).signInPageTryAgainText,
-        buttonText: 'Okay',
+        buttonText: S.of(context).signInPageOkLabel,
       );
 }
 
@@ -245,6 +245,6 @@ class _NoUserCreatedAlertDialog extends StatelessWidget {
   Widget build(BuildContext context) => SingleActionAlertDialog(
         title: S.of(context).signInPageNoUserCreatedError,
         message: S.of(context).signInPageNoUserCreatedErrorTryAgainText,
-        buttonText: 'Okay',
+        buttonText: S.of(context).signInPageOkLabel,
       );
 }

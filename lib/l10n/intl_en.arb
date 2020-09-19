@@ -18,6 +18,7 @@
   "signInPageNoUserCreatedError": "Seems like its your first time around here!",
   "signInPageNoUserCreatedErrorTryAgainText": "Please, Sign Up to proceed.",
   "signInPageWelcomeMessage": "Welcome back, {name}!",
+  "signInPageOkLabel": "OK!",
   "signUpUsernameFieldLabel": "Username",
   "signUpInvalidUsernameErrorLabel": "Invalid username format",
   "signUpEmptyUsernameErrorLabel": "Empty username field",
