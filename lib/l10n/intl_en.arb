@@ -17,6 +17,7 @@
   "signInPageTryAgainText": "Please, try again with another password.",
   "signInPageNoUserCreatedError": "Seems like its your first time around here!",
   "signInPageNoUserCreatedErrorTryAgainText": "Please, Sign Up to proceed.",
+  "signInPageWelcomeMessage": "Welcome back, {name}!",
   "signUpUsernameFieldLabel": "Username",
   "signUpInvalidUsernameErrorLabel": "Invalid username format",
   "signUpEmptyUsernameErrorLabel": "Empty username field",
