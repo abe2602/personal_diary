@@ -1,6 +1,6 @@
+import 'package:domain/use_case/get_user_name_uc.dart';
 import 'package:domain/use_case/sign_in_uc.dart';
 import 'package:domain/use_case/validate_password_uc.dart';
-import 'package:domain/use_case/get_user_name_uc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -19,7 +19,7 @@ import 'package:personal_diary/presentation/common/route_name_builder.dart';
 import 'package:personal_diary/presentation/common/view_utils.dart';
 import 'package:provider/provider.dart';
 
-class SignInPage extends StatefulWidget {
+class SignInPage extends StatelessWidget {
   const SignInPage({
     @required this.bloc,
   }) : assert(bloc != null);
@@ -44,64 +44,47 @@ class SignInPage extends StatefulWidget {
       );
 
   @override
-  State<StatefulWidget> createState() => SignInPageState();
-}
-
-class SignInPageState extends State<SignInPage> {
-  final _passwordFocusNode = FocusNode();
-  final _passwordTextController = TextEditingController();
-
-  @override
-  void initState() {
-    super.initState();
-
-    _passwordFocusNode.addFocusLostListener(
-      () => widget.bloc.onPasswordFocusLostSink.add(null),
-    );
-  }
-
-  @override
   Widget build(BuildContext context) => GestureDetector(
-        onTap: () => FocusScope.of(context).unfocus(),
-        child: AdaptiveScaffold(
-          backgroundColor: PersonalDiaryColors.lightBackground,
-          body: PersonalDiaryActionListener<SignInAction>(
-            actionStream: widget.bloc.onNewAction,
-            onReceived: (event) async {
-              if (event is ShowMainContent) {
-                await Navigator.of(
-                  context,
-                  rootNavigator: true,
-                ).pushNamedAndRemoveUntil(
-                  RouteNameBuilder.home(),
+    onTap: () => FocusScope.of(context).unfocus(),
+    child: AdaptiveScaffold(
+      backgroundColor: PersonalDiaryColors.lightBackground,
+      body: PersonalDiaryActionListener<SignInAction>(
+        actionStream: bloc.onNewAction,
+        onReceived: (event) async {
+          if (event is ShowMainContent) {
+            await Navigator.of(
+              context,
+              rootNavigator: true,
+            ).pushNamedAndRemoveUntil(
+              RouteNameBuilder.home(),
                   (_) => false,
-                );
-              } else if (event is ShowInvalidCredentialsError) {
-                await _InvalidCredentialsAlertDialog().showAsDialog(context);
-              } else if (event is NoUserCreatedError) {
-                await _NoUserCreatedAlertDialog().showAsDialog(context);
-              } else {
-                await GenericErrorAlertDialog().showAsDialog(context);
-              }
-            },
-            child: StreamBuilder<SignInState>(
-              stream: widget.bloc.onNewState,
-              builder: (context, snapshot) {
-                if (snapshot.hasData && snapshot.data is SignInFlow) {
-                  final SignInFlow flow = snapshot.data;
+            );
+          } else if (event is ShowInvalidCredentialsError) {
+            await _InvalidCredentialsAlertDialog().showAsDialog(context);
+          } else if (event is NoUserCreatedError) {
+            await _NoUserCreatedAlertDialog().showAsDialog(context);
+          } else {
+            await GenericErrorAlertDialog().showAsDialog(context);
+          }
+        },
+        child: StreamBuilder<SignInState>(
+          stream: bloc.onNewState,
+          builder: (context, snapshot) {
+            if (snapshot.hasData && snapshot.data is SignInFlow) {
+              final SignInFlow flow = snapshot.data;
 
-                  return _SignIn(
-                    bloc: widget.bloc,
-                    userName: flow.userName,
-                  );
-                } else {
-                  return LoadingIndicator();
-                }
-              },
-            ),
-          ),
+              return _SignIn(
+                bloc: bloc,
+                userName: flow.userName,
+              );
+            } else {
+              return LoadingIndicator();
+            }
+          },
         ),
-      );
+      ),
+    ),
+  );
 }
 
 class _SignIn extends StatefulWidget {
