@@ -15,7 +15,7 @@ class ValidateUsernameFormatUC
     if (username.isEmpty) {
       completer.completeError(EmptyFormFieldException());
       return completer.future;
-    } else if(username.contains(' ') || username.length > 12) {
+    } else if(username.length > 101) {
       completer.completeError(InvalidFormFieldException());
     } else {
       completer.complete();

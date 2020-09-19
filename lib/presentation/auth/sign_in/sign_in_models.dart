@@ -1,11 +1,14 @@
 abstract class SignInAction {}
 
+abstract class SignInActionError implements SignInAction {}
+
 class ShowMainContent implements SignInAction {}
 
-class ShowInvalidCredentialsError implements SignInAction {}
+class ShowInvalidCredentialsError implements SignInActionError {}
 
-class ShowSignInError implements SignInAction {
-}
+class NoUserCreatedError implements SignInActionError {}
+
+class ShowGenericError implements SignInActionError {}
 
 abstract class SignInState {}
 

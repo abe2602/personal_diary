@@ -27,7 +27,7 @@ class AdaptiveApp extends AdaptiveStatelessWidget {
           primaryColor: primaryColor,
           textTheme: const CupertinoTextThemeData(
             textStyle: TextStyle(
-              fontFamily: 'MPRounded',
+              fontFamily: 'WorkSans',
             ),
           ),
         ),
@@ -42,7 +42,7 @@ class AdaptiveApp extends AdaptiveStatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primarySwatch: primaryColor,
-          fontFamily: 'MPRounded',
+          fontFamily: 'WorkSans',
         ),
         onGenerateRoute: Provider.of<RouteFactory>(context, listen: false),
         localizationsDelegates: localizationsDelegates,

@@ -80,6 +80,16 @@ flutter:
         - asset: fonts/Karla-Regular.ttf
         - asset: fonts/Karla-Bold.ttf
           weight: 700
+    - family: WorkSans
+      fonts:
+        - asset: fonts/WorkSans-Black.ttf
+        - asset: fonts/WorkSans-Medium.ttf
+          weight: 500
+        - asset: fonts/WorkSans-Bold.ttf
+          weight: 700
+        - asset: fonts/WorkSans-ExtraBold.ttf
+          weight: 900
+
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 
