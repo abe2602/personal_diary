@@ -22,8 +22,7 @@ Future<void> main() async {
 
   WidgetsFlutterBinding.ensureInitialized();
 
-  Hive
-    ..init((await getApplicationDocumentsDirectory()).path);
+  Hive..init((await getApplicationDocumentsDirectory()).path);
 
   runApp(MainWidget());
 }
@@ -36,7 +35,7 @@ class MainWidget extends StatefulWidget {
 
 class MainWidgetState extends State<MainWidget> {
   @override
-  Widget build(BuildContext context) => PizzaCounterGeneralProvider(
+  Widget build(BuildContext context) => PersonalDiaryGeneralProvider(
         child: AdaptiveApp(
           localizationsDelegates: const [
             S.delegate,

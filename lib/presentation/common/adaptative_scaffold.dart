@@ -39,9 +39,11 @@ class AdaptiveScaffold extends AdaptiveStatelessWidget {
   Widget buildMaterialWidget(BuildContext context) => Scaffold(
         appBar: title != null
             ? AppBar(
-                title: Text(
-                  title,
-                  maxLines: 1,
+                title: Center(
+                  child: Text(
+                    title,
+                    maxLines: 1,
+                  ),
                 ),
                 actions: action != null ? <Widget>[action] : null,
               )

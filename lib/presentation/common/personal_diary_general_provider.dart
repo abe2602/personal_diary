@@ -1,16 +1,17 @@
+import 'package:domain/data_repository/auth_data_repository.dart';
+import 'package:domain/use_case/get_user_name_uc.dart';
 import 'package:domain/use_case/sign_in_uc.dart';
 import 'package:domain/use_case/sign_up_uc.dart';
-import 'package:domain/use_case/validate_username_uc.dart';
-import 'package:domain/use_case/validate_password_uc.dart';
 import 'package:domain/use_case/validate_confirm_password_uc.dart';
-import 'package:domain/use_case/get_user_name_uc.dart';
-import 'package:domain/data_repository/auth_data_repository.dart';
+import 'package:domain/use_case/validate_password_uc.dart';
+import 'package:domain/use_case/validate_username_uc.dart';
 import 'package:fluro/fluro.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:personal_diary/data/cache/auth_cds.dart';
 import 'package:personal_diary/data/repository/auth_repository.dart';
 import 'package:personal_diary/data/secure/auth_sds.dart';
+import 'package:personal_diary/presentation/auth/sign_in/sign_in_page.dart';
 import 'package:personal_diary/presentation/auth/sign_up/sign_up_page.dart';
 import 'package:personal_diary/presentation/common/route_name_builder.dart';
 import 'package:personal_diary/presentation/home_screen.dart';
@@ -21,8 +22,8 @@ import 'package:rxdart/rxdart.dart';
 
 import 'navigation_utils.dart';
 
-class PizzaCounterGeneralProvider extends StatelessWidget {
-  const PizzaCounterGeneralProvider({
+class PersonalDiaryGeneralProvider extends StatelessWidget {
+  const PersonalDiaryGeneralProvider({
     @required this.child,
   }) : assert(child != null);
 
@@ -50,18 +51,31 @@ class PizzaCounterGeneralProvider extends StatelessWidget {
             ..define(
               '/',
               handler: Handler(
+                handlerFunc: (context, params) => SignInPage.create(),
+              ),
+            )
+            ..define(
+              RouteNameBuilder.homePath,
+              handler: Handler(
                 handlerFunc: (context, params) => HomeScreen(),
               ),
             )
             ..define(
-              RouteNameBuilder.signUp(),
+              RouteNameBuilder.signInPath,
+              transitionType: TransitionType.native,
+              handler: Handler(
+                handlerFunc: (context, params) => SignInPage.create(),
+              ),
+            )
+            ..define(
+              RouteNameBuilder.signUpPath,
               transitionType: TransitionType.native,
               handler: Handler(
                 handlerFunc: (context, params) => SignUpPage.create(),
               ),
             )
             ..define(
-              RouteNameBuilder.home(),
+              RouteNameBuilder.postListPath,
               transitionType: TransitionType.native,
               handler: Handler(
                 handlerFunc: (context, params) => PostListPage(),
